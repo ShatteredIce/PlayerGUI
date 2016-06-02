@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:id="@+id/MainLayout">
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp" >
+
+    <LinearLayout
+        android:id="@+id/header"
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="right">
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="300dp"
+            android:textSize="20sp"
+            android:layout_height="wrap_content"
+            android:text="Current Players:"/>
+
+
+        <EditText
+            android:id="@+id/nameInput"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textFilter"
+            android:hint=""
+            android:ems="7"
+            android:maxLength="10"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Player"
+            android:id="@+id/button1" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/column"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="left">
+
+    </LinearLayout>
+
+</RelativeLayout>
