@@ -20,9 +20,12 @@ public class MainActivity extends Activity implements  View.OnClickListener {
     private RelativeLayout mLayout;
     private EditText usernameInput;
     private LinearLayout column;
+    private TextView numPlayers;
     Button addPlayer;
+    Button start;
     String[] roles = {"Mario","Luigi","MLG","Ghost","Solid Snake"};
     ArrayList<String> players = new ArrayList<String>();
+    int maxPlayers = 10;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,17 +35,21 @@ public class MainActivity extends Activity implements  View.OnClickListener {
         mLayout = (RelativeLayout) findViewById(R.id.MainLayout);
         usernameInput = (EditText) findViewById(R.id.nameInput);
         column = (LinearLayout) findViewById(R.id.column);
+        numPlayers = (TextView)this.findViewById(R.id.textView2);
         addPlayer = (Button)this.findViewById(R.id.button1);
         addPlayer.setOnClickListener(this);
+        start = (Button)this.findViewById(R.id.button2);
+        start.setOnClickListener(this);
     }
 
     public void onClick(View v){
         if(v.equals(addPlayer)){
-            if(!players.contains(usernameInput.getText().toString())&&!usernameInput.getText().toString().trim().equals("")){
+            if(!players.contains(usernameInput.getText().toString())&&!usernameInput.getText().toString().trim().equals("") && players.size() < maxPlayers){
                 usernameInput.setText(usernameInput.getText().toString().trim());
                 addNewPlayer();
                 players.add(usernameInput.getText().toString());
                 usernameInput.setText("");
+                numPlayers.setText(" "+players.size());
             }
         }
     }
@@ -58,7 +65,7 @@ public class MainActivity extends Activity implements  View.OnClickListener {
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
         );
-        params.gravity = Gravity.START;
+        params.gravity = Gravity.START|Gravity.CENTER;
         params.weight = 1;
 
         LinearLayout.LayoutParams params2 = new LinearLayout.LayoutParams(
@@ -68,7 +75,7 @@ public class MainActivity extends Activity implements  View.OnClickListener {
 
         TextView playerName = new TextView(this);
         playerName.setText(usernameInput.getText());
-        playerName.setTextSize(20);
+        playerName.setTextSize(16);
         playerName.setLayoutParams(params);
         newline.addView(playerName);
 
@@ -95,6 +102,7 @@ public class MainActivity extends Activity implements  View.OnClickListener {
             public void onClick(View v) {
                 players.remove(name.getText().toString());
                 column.removeView(line);
+                numPlayers.setText(" "+players.size());
             }
         };
     }
