@@ -4,6 +4,7 @@ package com.example.n2.playergui;
         import android.os.Bundle;
         import android.view.Gravity;
         import android.view.View;
+        import android.view.ViewGroup;
         import android.widget.ArrayAdapter;
         import android.widget.Button;
         import android.widget.EditText;
@@ -50,27 +51,36 @@ public class MainActivity extends Activity implements  View.OnClickListener {
 
         LinearLayout newline = new LinearLayout(this);
         newline.setOrientation(LinearLayout.HORIZONTAL);
+        newline.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+        newline.setGravity(Gravity.END);
+
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        );
+        params.gravity = Gravity.START;
+        params.weight = 1;
+
+        LinearLayout.LayoutParams params2 = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        );
 
         TextView playerName = new TextView(this);
         playerName.setText(usernameInput.getText());
         playerName.setTextSize(20);
-        playerName.setWidth(300);
+        playerName.setLayoutParams(params);
         newline.addView(playerName);
 
         Spinner playerRole = new Spinner(this);
         ArrayAdapter<String> adapter= new ArrayAdapter<String>(MainActivity.this,android.R.layout.simple_spinner_item, roles);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         playerRole.setAdapter(adapter);
-        playerRole.setMinimumWidth(100);
+        playerRole.setLayoutParams(params2);
         newline.addView(playerRole);
 
         Button deleteLine = new Button(this);
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-        );
-        params.setMargins(100, 0, 0, 0);
-        deleteLine.setLayoutParams(params);
+        deleteLine.setLayoutParams(params2);
         deleteLine.setText("Delete");
         deleteLine.setOnClickListener(delete(deleteLine, newline, playerName));
         newline.addView(deleteLine);
