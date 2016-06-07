@@ -24,7 +24,7 @@ public class MainActivity extends Activity implements  View.OnClickListener {
     Button addPlayer;
     Button start;
     String[] roles = {"Mario","Luigi","MLG","Ghost","Solid Snake"};
-    ArrayList<String> players = new ArrayList<String>();
+    ArrayList<Player> players = new ArrayList<Player>();
     int maxPlayers = 10;
 
     @Override
@@ -47,7 +47,6 @@ public class MainActivity extends Activity implements  View.OnClickListener {
             if(!players.contains(usernameInput.getText().toString())&&!usernameInput.getText().toString().trim().equals("") && players.size() < maxPlayers){
                 usernameInput.setText(usernameInput.getText().toString().trim());
                 addNewPlayer();
-                players.add(usernameInput.getText().toString());
                 usernameInput.setText("");
                 numPlayers.setText(" "+players.size());
             }
@@ -86,21 +85,23 @@ public class MainActivity extends Activity implements  View.OnClickListener {
         playerRole.setLayoutParams(params2);
         newline.addView(playerRole);
 
+        Player added = new Player(playerName, playerRole);
+        players.add(added);
+
         Button deleteLine = new Button(this);
         deleteLine.setLayoutParams(params2);
         deleteLine.setText("Delete");
-        deleteLine.setOnClickListener(delete(deleteLine, newline, playerName));
+        deleteLine.setOnClickListener(delete(deleteLine, newline, playerName, added));
         newline.addView(deleteLine);
 
 
         column.addView(newline);
-
     }
 
-    View.OnClickListener delete(final Button button, final LinearLayout line, final TextView name)  {
+    View.OnClickListener delete(final Button button, final LinearLayout line, final TextView name, final Player thisPlayer)  {
         return new View.OnClickListener() {
             public void onClick(View v) {
-                players.remove(name.getText().toString());
+                players.remove(thisPlayer);
                 column.removeView(line);
                 numPlayers.setText(" "+players.size());
             }
