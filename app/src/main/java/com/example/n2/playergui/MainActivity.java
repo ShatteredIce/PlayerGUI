@@ -1,6 +1,7 @@
 package com.example.n2.playergui;
 
         import android.app.Activity;
+        import android.content.Intent;
         import android.os.Bundle;
         import android.view.Gravity;
         import android.view.View;
@@ -50,6 +51,9 @@ public class MainActivity extends Activity implements  View.OnClickListener {
                 usernameInput.setText("");
                 numPlayers.setText(" "+players.size());
             }
+        }
+        else if(v.equals(start)){
+            startActivity(new Intent(MainActivity.this, SecondActivity.class));
         }
     }
 
