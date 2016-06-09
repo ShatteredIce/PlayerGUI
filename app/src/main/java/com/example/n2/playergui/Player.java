@@ -1,24 +1,29 @@
 package com.example.n2.playergui;
 
-import android.widget.TextView;
-import android.widget.Spinner;
+import java.io.Serializable;
 
 /**
  * Created by 301968 on 6/7/2016.
  */
-public class Player {
+public class Player implements Serializable{
 
     String name;
     String role;
-    Spinner myRole;
 
-    public Player(TextView newName, Spinner newSpinner){
-        name = newName.getText().toString();
-        myRole = newSpinner;
-        role = "Villager";
+    public Player(String newname, String newrole){
+        name = newname;
+        role = newrole;
     }
 
-    private void setRole(){
-        role = myRole.getSelectedItem().toString();
+    public String getName(){
+        return name;
+    }
+
+    public String getRole(){
+        return role;
+    }
+
+    private void setRole(String newrole) {
+        role = newrole;
     }
 }

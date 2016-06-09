@@ -5,7 +5,6 @@ package com.example.n2.playergui;
         import android.os.Bundle;
         import android.view.Gravity;
         import android.view.View;
-        import android.view.ViewGroup;
         import android.widget.ArrayAdapter;
         import android.widget.Button;
         import android.widget.EditText;
@@ -25,7 +24,8 @@ public class MainActivity extends Activity implements  View.OnClickListener {
     Button addPlayer;
     Button start;
     String[] roles = {"Mario","Luigi","MLG","Ghost","Solid Snake"};
-    ArrayList<Player> players = new ArrayList<Player>();
+    ArrayList<PlayerSetup> players = new ArrayList<>();
+    ArrayList<Player> playerData = new ArrayList<>();
     int maxPlayers = 10;
 
     @Override
@@ -52,8 +52,14 @@ public class MainActivity extends Activity implements  View.OnClickListener {
                 numPlayers.setText(" "+players.size());
             }
         }
-        else if(v.equals(start)){
-            startActivity(new Intent(MainActivity.this, SecondActivity.class));
+        else if(v.equals(start)) {
+            for(int i = 0; i < players.size(); i++){
+                players.get(i).setRole();
+                playerData.add(new Player(players.get(i).getName(),(players.get(i).getRole())));
+            }
+            Intent nextScreen = new Intent(MainActivity.this, SecondActivity.class);
+            nextScreen.putExtra("playerList", playerData);
+            startActivity(nextScreen);
         }
     }
 
@@ -89,7 +95,7 @@ public class MainActivity extends Activity implements  View.OnClickListener {
         playerRole.setLayoutParams(params2);
         newline.addView(playerRole);
 
-        Player added = new Player(playerName, playerRole);
+        PlayerSetup added = new PlayerSetup(playerName, playerRole);
         players.add(added);
 
         Button deleteLine = new Button(this);
@@ -102,7 +108,7 @@ public class MainActivity extends Activity implements  View.OnClickListener {
         column.addView(newline);
     }
 
-    View.OnClickListener delete(final Button button, final LinearLayout line, final TextView name, final Player thisPlayer)  {
+    View.OnClickListener delete(final Button button, final LinearLayout line, final TextView name, final PlayerSetup thisPlayer)  {
         return new View.OnClickListener() {
             public void onClick(View v) {
                 players.remove(thisPlayer);
