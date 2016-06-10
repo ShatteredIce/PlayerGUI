@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * Created by 301968 on 6/7/2016.
  */
-public class Player implements Serializable{
+public class  Player implements Serializable{
 
     String name;
     String role;

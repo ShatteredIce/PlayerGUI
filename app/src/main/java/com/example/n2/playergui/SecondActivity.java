@@ -25,6 +25,7 @@ public class SecondActivity extends Activity implements View.OnClickListener {
         setContentView(R.layout.layout2);
 
         RelativeLayout screen = (RelativeLayout)findViewById(R.id.secondScreen);
+        LinearLayout center = (LinearLayout)findViewById(R.id.center);
         TextView header = (TextView)findViewById(R.id.textView1);
         quit = (Button) findViewById(R.id.quit);
         quit.setOnClickListener(this);
@@ -36,8 +37,7 @@ public class SecondActivity extends Activity implements View.OnClickListener {
         LinearLayout buttonLine = new LinearLayout(this);
         LinearLayout currentLine = buttonLine;
         buttonLine.setOrientation(LinearLayout.HORIZONTAL);
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        params.addRule(RelativeLayout.BELOW, header.getId());
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         buttonLine.setLayoutParams(params);
         LinearLayout.LayoutParams buttonParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
@@ -45,16 +45,15 @@ public class SecondActivity extends Activity implements View.OnClickListener {
             Button playerButton = new Button(this);
             playerButton.setLayoutParams(buttonParams);
             playerButton.setText(players.get(a).getName());
-            buttonLine.addView(currentLine);
+            currentLine.addView(playerButton);
             if(a%2 == 1){
-
+                center.addView(currentLine);
                 LinearLayout newLine = new LinearLayout(this);
                 newLine.setLayoutParams(params);
                 currentLine = newLine;
             }
-            screen.addView(currentLine);
         }
-
+        center.addView(currentLine);
 
     }
 
