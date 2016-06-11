@@ -57,6 +57,9 @@ public class SecondActivity extends Activity implements View.OnClickListener {
 
     }
 
+    public void onBackPressed() {
+    }
+
     public void onClick(View v) {
         if(v.equals(quit)){
             startActivity(new Intent(SecondActivity.this, MainActivity.class));

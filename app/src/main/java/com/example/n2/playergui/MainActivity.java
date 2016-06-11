@@ -23,7 +23,7 @@ public class MainActivity extends Activity implements  View.OnClickListener {
     private TextView numPlayers;
     Button addPlayer;
     Button start;
-    String[] roles = {"Mario","Luigi","MLG","Ghost","Solid Snake"};
+    String[] roles = {"Mario","Luigi","MLG","Ghost","Solid Snake","Quickscoper","Cyro","Tank","Stealth"};
     ArrayList<PlayerSetup> players = new ArrayList<>();
     ArrayList<Player> playerData = new ArrayList<>();
     int maxPlayers = 10;
@@ -41,6 +41,9 @@ public class MainActivity extends Activity implements  View.OnClickListener {
         addPlayer.setOnClickListener(this);
         start = (Button)this.findViewById(R.id.button2);
         start.setOnClickListener(this);
+    }
+
+    public void onBackPressed() {
     }
 
     public void onClick(View v){
